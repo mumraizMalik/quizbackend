@@ -50,10 +50,7 @@ app.post("/api/admin/register", async (req, res) => {
     res.send("failed");
   }
 });
-app.post("/", async (req, res) => {
-  res.status(200);
-  res.send({ hello: "hello" });
-});
+
 app.post("/api/admin/LogIn", async (req, res) => {
   if (req.body) {
     try {
