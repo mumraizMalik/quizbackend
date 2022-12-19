@@ -9,7 +9,9 @@ app.use(express.json());
 
 const port = process.env.port || 3000;
 const secretKey = "Apple";
-mongoose.connect("mongodb://localhost:27017");
+
+//  mongodb+srv://mumraiz:<mumraiz1021>@cluster0.k3cfou0.mongodb.net/?retryWrites=true&w=majority
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017");
 
 app.post("/api/admin/register", async (req, res) => {
   if (req.body?.userName && req.body?.password) {
