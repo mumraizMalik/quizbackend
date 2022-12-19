@@ -12,8 +12,11 @@ const port = process.env.PORT || 3000;
 
 const secretKey = "Apple";
 
-//  mongodb+srv://mumraiz:<mumraiz1021>@cluster0.k3cfou0.mongodb.net/?retryWrites=true&w=majority
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017");
+//  mongodb+srv://mumraiz:mumraiz1021@cluster0.k3cfou0.mongodb.net/?retryWrites=true&w=majority
+mongoose.connect(
+  "mongodb+srv://mumraiz:mumraiz1021@cluster0.k3cfou0.mongodb.net/?retryWrites=true&w=majority"
+);
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017");
 
 app.post("/api/admin/register", async (req, res) => {
   if (req.body?.userName && req.body?.password) {
@@ -152,7 +155,7 @@ app.post("/api/admin/Add-new-story/", verifyToken, async (req, res) => {
     }
   });
 });
-app.post("/api/customer/get/category", async (req, res) => {
+app.get("/api/customer/get/category", async (req, res) => {
   const result = await Story.find({});
   const data = [];
   if (result.length != 0) {
@@ -168,7 +171,7 @@ app.post("/api/customer/get/category", async (req, res) => {
     res.send("Category does not exist");
   }
 });
-app.post("/api/customer/get/category/storyname", async (req, res) => {
+app.get("/api/customer/get/category/storyname", async (req, res) => {
   const result = await Story.find({
     category: req.body.category,
   });
@@ -186,7 +189,7 @@ app.post("/api/customer/get/category/storyname", async (req, res) => {
     res.send("Category does not exist");
   }
 });
-app.post("/api/customer/get/category/storyWithQ/:id", async (req, res) => {
+app.get("/api/customer/get/category/storyWithQ/:id", async (req, res) => {
   const result = await Story.findOne({
     Storyid: req.params.id,
   });
