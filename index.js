@@ -8,6 +8,7 @@ const bcrypt = require("bcryptjs");
 app.use(express.json());
 
 const port = process.env.port || 3000;
+
 const secretKey = "Apple";
 
 //  mongodb+srv://mumraiz:<mumraiz1021>@cluster0.k3cfou0.mongodb.net/?retryWrites=true&w=majority
@@ -47,7 +48,7 @@ app.post("/api/admin/register", async (req, res) => {
 });
 app.post("/", async (req, res) => {
   res.status(200);
-  res.send("api Call");
+  res.send({ hello: "hello" });
 });
 app.post("/api/admin/LogIn", async (req, res) => {
   if (req.body) {
@@ -150,7 +151,7 @@ app.post("/api/admin/Add-new-story/", verifyToken, async (req, res) => {
     }
   });
 });
-app.get("/api/customer/get/category", async (req, res) => {
+app.post("/api/customer/get/category", async (req, res) => {
   const result = await Story.find({});
   const data = [];
   if (result.length != 0) {
@@ -166,7 +167,7 @@ app.get("/api/customer/get/category", async (req, res) => {
     res.send("Category does not exist");
   }
 });
-app.get("/api/customer/get/category/storyname", async (req, res) => {
+app.post("/api/customer/get/category/storyname", async (req, res) => {
   const result = await Story.find({
     category: req.body.category,
   });
@@ -184,7 +185,7 @@ app.get("/api/customer/get/category/storyname", async (req, res) => {
     res.send("Category does not exist");
   }
 });
-app.get("/api/customer/get/category/storyWithQ/:id", async (req, res) => {
+app.post("/api/customer/get/category/storyWithQ/:id", async (req, res) => {
   const result = await Story.findOne({
     Storyid: req.params.id,
   });
